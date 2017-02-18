@@ -1,0 +1,180 @@
+" disable vi compatibility (emulation of old bugs)
+set nocompatible
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+filetype indent on
+
+
+" VIM Configuration File
+" Description: Optimized for C/C++ development, but useful also for other things.
+" Copied from https://gist.githubusercontent.com/rocarvaj/2513367/raw/626199ba537941208a479a0e7c93b9ed6fd42ac9/.vimrc
+" Author: Baodong Liu
+"
+
+" set UTF-8 encoding
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
+" use indentation of previous line
+set autoindent
+" use intelligent indentation for C
+set smartindent
+" configure tabwidth and insert spaces instead of tabs
+set tabstop=4        " tab width is 4 spaces
+set shiftwidth=4     " indent also with 4 spaces
+set expandtab        " expand tabs to spaces
+
+
+" wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
+set textwidth=120
+
+" turn syntax highlighting on
+set t_Co=256
+syntax on
+" colorscheme wombat256
+" turn line numbers on
+set number
+" highlight matching braces
+set showmatch
+" intelligent comments
+set comments=sl:/*,mb:\ *,elx:\ */
+
+" default auto-completion for c family
+let g:ycm_global_ycm_extra_conf="~/.vim/.ycm_extra_conf.py"
+
+" Enhanced keyboard mappings
+"
+" in normal mode F2 will save the file
+nmap <F2> :w<CR>
+" in insert mode F2 will exit insert, save, enters insert again
+imap <F2> <ESC>:w<CR>i
+
+"
+" For SuperTab
+"
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" ---------------------------------- "
+" Configure Ultisnip and YouCompleteMe
+" ---------------------------------- "
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" ---------------------------------- "
+" Configure YouCompleteMe
+" ---------------------------------- "
+
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
+" Goto definition with F3
+map <F3> :YcmCompleter GoTo<CR>
+
+"======================================================================
+" For EasyAlign
+"Then with the following lines of text,
+"
+"apple   =red
+"grass+=green
+"sky-=   blue
+"try these commands:
+"
+"vipga=
+"visual-select inner paragraph
+"Start EasyAlign command (ga)
+"Align around =
+"gaip=
+"Start EasyAlign command (ga) for inner paragraph
+"Align around =
+" 
+"======================================================================
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" ---------------------------------- "
+" Common
+" ---------------------------------- "
+
+" Python shiftwidth, tabstop, softtabstop
+autocmd FileType python set sw=4
+autocmd FileType python set ts=4
+autocmd FileType python set sts=4
+autocmd FileType python set colorcolumn=120
+let g:pymode_options_max_line_length=120
+" use nosmarttab to avoid # at the beginning of the line
+autocmd FileType python set nosmartindent
+autocmd FileType python nnoremap <buffer> <F5> :exec 'w !python3' shellescape(@%, 1)<cr>
+
+"
+" Let syntastic check syntax for python 3
+let g:syntastic_python_flake8_exec = 'python3'
+let g:syntastic_python_flake8_args = ['-m', 'flake8', '--ignore', 'E501']
+" let g:syntastic_python_flake8_args = '--ignore=E501'
+let g:syntastic_python_pylint_exe = 'python3 -m pylint3'
+"
+"
+"To let YouCompleteMe to provide Python 3 completion
+let g:ycm_python_binary_path = '/usr/bin/python3'
+
+
+" Show linenumbers
+set number
+
+" set mapleader to a easier typable key
+let mapleader = ","
+
+
+syntax enable
+set background=dark
+colorscheme solarized
+
+" to avoid see underscore (_) as space
+:set linespace=2
+
+" show highlights of the whole match
+set hlsearch
+
+"=============================================================
+" How to paste in insert mode
+" ============================================================
+" While in insert mode, you can use Ctrl-R {register}, where register can be:
+"     + for the clipboard,
+"     * for the X clipboard (last selected text in X, vim has to be compiled with X enabled),
+"     " for the unnamed register (last delete or yank in Vim),
+"     or a number of others (see :h registers).
+" Ctrl-R {register} inserts the text as if it were typed.
+" Ctrl-R Ctrl-O {register} inserts the text with the original indentation.
+" Ctrl-R Ctrl-P {register} inserts the text and auto-indents it.
+" Ctrl-O can be used to run any normal mode command before returning to insert mode, so 
+" Ctrl-O "+p can also be used, for example.
+" For more information, view the documentation with :h i_ctrl-r
+" 
+" ============================================================
+" Disable vim preview in complete windows auto pop out
+" ============================================================
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" set startup windows size
+set lines=50 columns=120
+
+
+" Config vim-slime and tmux
+let g:slime_target = "tmux"
+let g:slime_paste_file = "$HOME/.slime_paste"
