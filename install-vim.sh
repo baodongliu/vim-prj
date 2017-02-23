@@ -35,3 +35,11 @@ done
 git add .
 git commit -m "Use pathogen and git submodules to keep track of vim plugins"
 git push origin master
+
+# One a new machine configure vim from github saving
+cd ~
+git clone git@github.com:baodongliu/vim-prj.git ~/.vim
+ln -s ~/.vim/myvimrc ~/.vimrc
+ln -s ~/.vim/mytmux.conf ~/.tmux.conf
+cd ~/.vim
+git submodule update --init
