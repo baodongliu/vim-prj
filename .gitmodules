@@ -31,6 +31,3 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe
-[submodule "bundle/riv"]
-	path = bundle/riv
-	url = git@github.com:Rykka/riv.vim
