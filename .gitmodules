@@ -31,3 +31,6 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe
+[submodule "bundle/rst-headings.vim"]
+	path = bundle/rst-headings.vim
+	url = git@github.com:baodongliu/rst-headings.vim

@@ -20,6 +20,7 @@ jpalardy/vim-slime
 vim-syntastic/syntastic
 altercation/vim-colors-solarized
 sheerun/vim-polyglot
+baodongliu/rst-headings.vim
 Valloric/YouCompleteMe"
 
 for vim_module in $vim_modules
