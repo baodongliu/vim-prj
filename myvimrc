@@ -120,14 +120,14 @@ autocmd FileType python nnoremap <buffer> <F5> :exec 'w !python3' shellescape(@%
 
 "
 " Let syntastic check syntax for python 3
-let g:syntastic_python_flake8_exec = 'python3'
+let g:syntastic_python_flake8_exec = 'python3.6'
 let g:syntastic_python_flake8_args = ['-m', 'flake8', '--ignore', 'E501']
 " let g:syntastic_python_flake8_args = '--ignore=E501'
-let g:syntastic_python_pylint_exe = 'python3 -m pylint3'
+let g:syntastic_python_pylint_exe = 'python3.6 -m pylint3'
 "
 "
 "To let YouCompleteMe to provide Python 3 completion
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = '/usr/bin/python3.6'
 
 
 " Show linenumbers
@@ -179,3 +179,40 @@ set lines=50 columns=120
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 
+" using % to jump between maching keywords
+runtime macros/matchit.vim
+
+" Add support for systemverilog and verilog
+augroup verilog_sv
+    autocmd!
+    autocmd FileType systemverilog,verilog if isdirectory('~/.vim/bundle-sv') | execute pathogen#infect('bundle/{}') | endif
+
+    if exists('loaded_matchit')
+        let b:match_ignorecase=1
+        let b:match_words=
+          \ '\<begin\>:\<end\>,' .
+          \ '\<if\>:\<else\>,' .
+          \ '\<module\>:\<endmodule\>,' .
+          \ '\<class\>:\<endclass\>,' .
+          \ '\<program\>:\<endprogram\>,' .
+          \ '\<clocking\>:\<endclocking\>,' .
+          \ '\<property\>:\<endproperty\>,' .
+          \ '\<sequence\>:\<endsequence\>,' .
+          \ '\<package\>:\<endpackage\>,' .
+          \ '\<covergroup\>:\<endgroup\>,' .
+          \ '\<primitive\>:\<endprimitive\>,' .
+          \ '\<specify\>:\<endspecify\>,' .
+          \ '\<generate\>:\<endgenerate\>,' .
+          \ '\<interface\>:\<endinterface\>,' .
+          \ '\<function\>:\<endfunction\>,' .
+          \ '\<task\>:\<endtask\>,' .
+          \ '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,' .
+          \ '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,' .
+          \ '`ifdef\>:`else\>:`endif\>,'
+    endif
+
+    autocmd FileType systemverilog,verilog set sw=4
+    autocmd FileType systemverilog,verilog set ts=4
+    autocmd FileType systemverilog,verilog set sts=4
+    autocmd FileType systemverilog,verilog set colorcolumn=120
+augroup END

@@ -34,3 +34,9 @@
 [submodule "bundle/rst-headings.vim"]
 	path = bundle/rst-headings.vim
 	url = git@github.com:baodongliu/rst-headings.vim
+[submodule "bundle-sv/verilog_systemverilog.vim"]
+	path = bundle-sv/verilog_systemverilog.vim
+	url = git@github.com:vhda/verilog_systemverilog.vim.git
+[submodule "bundle/hl_matchit"]
+	path = bundle/hl_matchit
+	url = git@github.com:vimtaku/hl_matchit.vim.git
